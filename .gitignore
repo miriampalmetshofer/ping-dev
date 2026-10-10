@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+# Runtime state created on the VM.
+data/
+workspaces/
+logs/
+
+# Codex/local credentials must never be committed.
+.codex/
+auth.json
+
+# OS/editor noise.
+.DS_Store
+.idea/
+.vscode/

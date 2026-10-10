@@ -1,0 +1,17 @@
+{
+  "name": "misi",
+  "remoteUrl": "git@github.com:miriampalmetshofer/misi.git",
+  "defaultBranch": "main",
+  "agentInstructionsPath": "AGENTS.md",
+  "install": "mise exec -- npm install",
+  "checks": [
+    "mise exec -- npm run lint",
+    "mise exec -- npm run test",
+    "mise exec -- npm run build"
+  ],
+  "allowedEnvironment": [
+    "CODEX_API_KEY",
+    "CODEX_ACCESS_TOKEN",
+    "GITHUB_TOKEN"
+  ]
+}
