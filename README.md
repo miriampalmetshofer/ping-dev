@@ -61,6 +61,7 @@ This is intentionally dependency-light until the VM POC proves the runtime.
 ```bash
 npm install
 npm run typecheck
+npm run preflight
 ```
 
 No production secrets are required for local typechecking.

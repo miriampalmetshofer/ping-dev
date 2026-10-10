@@ -8,11 +8,8 @@ on the VM and complete a reviewable development loop.
 On the Oracle VM:
 
 ```bash
-git --version
-node --version
-npm --version
-gh --version
-codex --version
+npm install
+npm run preflight
 ```
 
 Clone this orchestrator repo and the target repo.
