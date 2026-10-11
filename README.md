@@ -48,8 +48,9 @@ Agents should read these in order:
 
 1. `AGENTS.md`
 2. `docs/architecture.md`
-3. `docs/poc-vm.md`
-4. relevant files in `docs/decisions/`
+3. `docs/openclaw-evaluation.md`
+4. `docs/poc-vm.md`
+5. relevant files in `docs/decisions/`
 
 Keep durable context in docs, not hidden chat history. Use decision records only
 for choices that would be expensive or confusing to rediscover.

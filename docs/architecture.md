@@ -6,6 +6,30 @@ Draft for VM proof of concept.
 
 ## Components
 
+### Candidate: OpenClaw Gateway
+
+OpenClaw may cover parts of the control plane:
+
+- Telegram channel integration
+- user/session routing
+- Codex harness integration
+- agent workspace/session management
+- plugin-based extension points
+
+This is promising, but not yet accepted as the system architecture. The
+project-specific requirements remain:
+
+- one product task maps to one durable task record
+- Miriam remains the technical gatekeeper
+- generated work exits through GitHub pull requests
+- permissions are enforced outside model prompts
+- repository-specific behavior stays in repo config and target-repo
+  instructions
+
+If OpenClaw is adopted, this project should become either a thin OpenClaw
+plugin/config layer or a companion service that owns task policy and GitHub PR
+state while delegating chat/runtime mechanics to OpenClaw.
+
 ### TypeScript Orchestrator
 
 Owns:
@@ -19,6 +43,9 @@ Owns:
 - GitHub PR metadata
 
 It should not make implementation decisions for target repos.
+
+If OpenClaw satisfies the channel/session/runtime requirements, this component
+should shrink rather than duplicate OpenClaw features.
 
 ### Runner
 

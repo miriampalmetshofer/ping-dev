@@ -14,7 +14,25 @@ npm run preflight
 
 Clone this orchestrator repo and the target repo.
 
-## Gate 2: Codex Authentication
+## Gate 2: OpenClaw Evaluation
+
+Before building custom Telegram/session orchestration, check whether OpenClaw
+can own that layer.
+
+Evaluate:
+
+- Can OpenClaw run reliably on the Oracle ARM VM?
+- Does its Telegram channel support the access-control behavior we need?
+- Can its Codex harness use the same Codex authentication we prove below?
+- Can one product task map to one durable OpenClaw session or thread?
+- Can we attach our own task IDs, branch names, and PR URLs?
+- Can we enforce "no merge, no deploy, no production secrets" outside prompts?
+- Does adopting OpenClaw reduce code we maintain without hiding critical state?
+
+Success means OpenClaw becomes the preferred runtime/channel layer. Failure
+means we continue with the custom TypeScript orchestrator.
+
+## Gate 3: Codex Authentication
 
 Try the least surprising supported mode first.
 
@@ -41,7 +59,7 @@ codex exec --json "Say only: codex auth survived reboot"
 
 Record the result in `docs/decisions/` if it changes the architecture.
 
-## Gate 3: Target Repo Build
+## Gate 4: Target Repo Build
 
 For `misi`, run the commands from `configs/repos/misi.example.json`.
 
@@ -55,7 +73,7 @@ Success means:
 If a command differs on the VM, update the repo config instead of hardcoding it
 in source.
 
-## Gate 4: Manual Codex Development Loop
+## Gate 5: Manual Codex Development Loop
 
 In a clean worktree, ask Codex to make a small real change.
 
@@ -67,7 +85,7 @@ Required result:
 - commit created
 - no direct push to `main`
 
-## Gate 5: PR Creation
+## Gate 6: PR Creation
 
 Extend the loop:
 
@@ -75,14 +93,14 @@ Extend the loop:
 - create a GitHub PR
 - include human-readable summary and test results
 
-## Gate 6: Disconnect and Recovery
+## Gate 7: Disconnect and Recovery
 
 Start a task, disconnect SSH, and reconnect later.
 
 Then test reboot behavior. A task interrupted by reboot must be visible in
 durable state and either resumable or clearly marked as interrupted.
 
-## Gate 7: Programmatic Invocation
+## Gate 8: Programmatic Invocation
 
 Only after manual CLI operation works, add a tiny TypeScript runner that can:
 
@@ -91,4 +109,5 @@ Only after manual CLI operation works, add a tiny TypeScript runner that can:
 - detect question/completion/failure
 - persist run status
 
-Do not add Telegram before this gate passes.
+Do not add custom Telegram handling before this gate passes. If OpenClaw passes
+Gate 2, build the first Telegram slice through OpenClaw instead.
